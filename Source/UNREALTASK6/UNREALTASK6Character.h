@@ -28,6 +28,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapons")
 	class AWeapon* EquippedWeapon;
 
+	TArray<AActor*> IntArray;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapons")
 		bool isPistol;
@@ -35,6 +36,8 @@ public:
 		bool isRifle;
 
 	void SwitchWeapon();
+
+	//void GetAttachedActors();
 
 	FORCEINLINE AWeapon* getEquippedWeapon() { return EquippedWeapon; };
 	FORCEINLINE void SetEquippedWeapon(AWeapon* Weapon) { EquippedWeapon = Weapon; };

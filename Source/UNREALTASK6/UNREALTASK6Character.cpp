@@ -7,6 +7,9 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "GameFramework/Actor.h"
+#include "Engine/SkeletalMeshSocket.h"
+
 
 //////////////////////////////////////////////////////////////////////////
 // AUNREALTASK6Character
@@ -53,6 +56,7 @@ AUNREALTASK6Character::AUNREALTASK6Character()
 	//WEAPON STUFF
 	isPistol = false;
 	isRifle = false;
+	
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -107,20 +111,29 @@ void AUNREALTASK6Character::LookUpAtRate(float Rate)
 
 void AUNREALTASK6Character::SwitchWeapon()
 {
-	if (isPistol == true) {
-		UE_LOG(LogTemp, Warning, TEXT("Pistol"));
-		isPistol = false;
-		isRifle = true;
+	//if (isPistol == true) {
+	//	UE_LOG(LogTemp, Warning, TEXT("Pistol"));
+	//	isPistol = false;
+	//	isRifle = true;
+	//}
+	//else if (isRifle == true) {
+	//	UE_LOG(LogTemp, Warning, TEXT("Rifle"));
+	//	isPistol = true;
+	//	isRifle = false;
+	//}
+	//else {
+	//	UE_LOG(LogTemp, Warning, TEXT("Empty"));
+	//}
+	//UE_LOG(LogTemp, Warning, );
+	GetAttachedActors(IntArray, true, true);
+	for (auto& Actor : IntArray)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("AllWeapons: %s"), *Actor->GetName())
 	}
-	else if (isRifle == true) {
-		UE_LOG(LogTemp, Warning, TEXT("Rifle"));
-		isPistol = true;
-		isRifle = false;
-	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("Empty"));
-	}
+	//USkeletalMeshSocket* PlayerMesh = GetSocketByName("hand_rSocket_rifle");
+	
 }
+
 
 void AUNREALTASK6Character::MoveForward(float Value)
 {
