@@ -24,6 +24,8 @@ AWeapon::AWeapon()
 void AWeapon::BeginPlay()
 {
 	Super::BeginPlay();
+	CollisionVolume->OnComponentBeginOverlap.AddDynamic(this, &AWeapon::OnOverlapBegin);
+	CollisionVolume->OnComponentEndOverlap.AddDynamic(this, &AWeapon::OnOverlapEnd);
 	
 }
 
@@ -31,8 +33,7 @@ void AWeapon::BeginPlay()
 void AWeapon::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	CollisionVolume->OnComponentBeginOverlap.AddDynamic(this, &AWeapon::OnOverlapBegin);
-	CollisionVolume->OnComponentEndOverlap.AddDynamic(this, &AWeapon::OnOverlapEnd);
+	
 
 }
 
@@ -44,15 +45,23 @@ void AWeapon::Equip(AUNREALTASK6Character* Char) {
 			if (Socket) {
 				Socket->AttachActor(this, Char->GetMesh());
 				Char->SetEquippedWeapon(this);
+				Char->WeaponAdd(this);
+				
 			}
+			//UE_LOG(LogTemp, Warning, TEXT("WorkingBGUN"))
+			Char->EquipWeapon(this);
 		}
 		else {
 			const USkeletalMeshSocket* Socket = Char->GetMesh()->GetSocketByName("hand_rSocket_pistol");
 			if (Socket) {
 				Socket->AttachActor(this, Char->GetMesh());
 				Char->SetEquippedWeapon(this);
+				Char->WeaponAdd(this);
 			}
+			Char->EquipWeapon(this);
 		}
+		//Char->IntArray.Push(this);
+		
 	}
 }
 
@@ -62,6 +71,9 @@ void AWeapon::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* O
 		AUNREALTASK6Character* Char = Cast<AUNREALTASK6Character>(OtherActor);
 		if (Char) {
 			Equip(Char);
+			//UE_LOG(LogTemp, Warning, TEXT("Working"))
+			//CollisionVolume->DestroyComponent();
+
 		}
 }
 }

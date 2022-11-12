@@ -28,12 +28,18 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapons")
 	class AWeapon* EquippedWeapon;
 
-	TArray<AActor*> IntArray;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapons")
+		int weaponIndex;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapons")
-		bool isPistol;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapons")
-		bool isRifle;
+	TArray<AWeapon*> IntArray;
+
+	void WeaponAdd(AWeapon* weapon);
+
+	void EquipWeapon(AWeapon* weaponFloor);
+
+	void SwitchWeaponMesh(int currentIndex);
 
 	void SwitchWeapon();
 

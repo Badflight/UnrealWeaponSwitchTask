@@ -54,8 +54,7 @@ AUNREALTASK6Character::AUNREALTASK6Character()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
 	//WEAPON STUFF
-	isPistol = false;
-	isRifle = false;
+	weaponIndex = 0;
 	
 }
 
@@ -109,28 +108,63 @@ void AUNREALTASK6Character::LookUpAtRate(float Rate)
 	AddControllerPitchInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
 }
 
+void AUNREALTASK6Character::WeaponAdd(AWeapon* weapon)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Weapon Added"));
+	IntArray.Push(weapon);
+}
+
+void AUNREALTASK6Character::EquipWeapon(AWeapon* weaponFloor)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Weapon Equipped"));
+}
+
+void AUNREALTASK6Character::SwitchWeaponMesh(int currentIndex)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Weapon %s"));
+}
+
 void AUNREALTASK6Character::SwitchWeapon()
 {
-	//if (isPistol == true) {
-	//	UE_LOG(LogTemp, Warning, TEXT("Pistol"));
-	//	isPistol = false;
-	//	isRifle = true;
-	//}
-	//else if (isRifle == true) {
-	//	UE_LOG(LogTemp, Warning, TEXT("Rifle"));
-	//	isPistol = true;
-	//	isRifle = false;
-	//}
-	//else {
-	//	UE_LOG(LogTemp, Warning, TEXT("Empty"));
-	//}
-	//UE_LOG(LogTemp, Warning, );
-	GetAttachedActors(IntArray, true, true);
-	for (auto& Actor : IntArray)
+
+	//GetAttachedActors(IntArray, true, true);
+	/*for (auto& Actor : IntArray)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("AllWeapons: %s"), *Actor->GetName())
-	}
+	}*/
+	//int numbInArray;
+	//numbInArray = IntArray.Num();
+	//UE_LOG(LogTemp, Warning, TEXT("AllWeapons: %s"), numbInArray);
 	//USkeletalMeshSocket* PlayerMesh = GetSocketByName("hand_rSocket_rifle");
+	switch (weaponIndex)
+	{
+		case 0:
+			if (IntArray.Num() > 0) {
+				weaponIndex = 1;
+				//switch mesh
+				UE_LOG(LogTemp, Warning, TEXT("Weapon 1"));
+				SwitchWeaponMesh(weaponIndex);
+			}
+		/*	else
+			{
+				weaponIndex = 0;
+			}*/
+			break;
+		case 1:
+			if (IntArray.Num() > 1) {
+				weaponIndex = 0;
+				//switch mesh
+				UE_LOG(LogTemp, Warning, TEXT("Weapon 2"));
+				SwitchWeaponMesh(weaponIndex);
+			}
+		/*	else
+			{
+				weaponIndex = 0;
+			}*/
+			break;
+		default:
+			break;
+	}
 	
 }
 
