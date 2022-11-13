@@ -31,6 +31,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapons")
 		int weaponIndex;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapons")
+		bool isHoldingPistol;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapons")
 	TArray<AWeapon*> IntArray;

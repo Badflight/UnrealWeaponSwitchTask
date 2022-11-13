@@ -55,6 +55,8 @@ AUNREALTASK6Character::AUNREALTASK6Character()
 
 	//WEAPON STUFF
 	weaponIndex = 0;
+	isHoldingPistol = false;
+	
 	
 }
 
@@ -121,7 +123,7 @@ void AUNREALTASK6Character::EquipWeapon(AWeapon* weaponFloor)
 
 void AUNREALTASK6Character::SwitchWeaponMesh(int currentIndex)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Weapon %s"));
+	
 }
 
 void AUNREALTASK6Character::SwitchWeapon()
@@ -144,6 +146,8 @@ void AUNREALTASK6Character::SwitchWeapon()
 				//switch mesh
 				UE_LOG(LogTemp, Warning, TEXT("Weapon 1"));
 				SwitchWeaponMesh(weaponIndex);
+				//EquippedWeapon = IntArray[weaponIndex];
+				//UE_LOG(LogTemp, Warning, TEXT("The Actor's name is %s"), EquippedWeapon);
 			}
 		/*	else
 			{
